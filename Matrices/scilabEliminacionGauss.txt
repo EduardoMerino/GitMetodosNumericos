@@ -1,0 +1,28 @@
+/*
+A = [5, 6, 3; 6, 8, -9; 7, -6, -5];
+l = length(A(: ,1));
+m = l-1;
+for i = 1:l
+    x = 1 / A(i, i);
+    A(i, :) = A(i, :) * x;
+    for j = i:m
+        e = -1 * A(i+j, i);
+        p = A(i, :) * e;
+        A(i + j, :) = A(i + j, :) + p;
+    end
+    m = m - 1;
+end
+*/
+AUM = [2, 3, 5, 7; 1, 8, -4, 8; 3, -6, -5, -10]; //matriz aumentada
+l = length(AUM(: ,1));
+
+for k = 1: l-1
+  for i = k+1: l
+    for j = k+1 : l+1
+      AUM(i,j) = AUM(i,j) - AUM(k,j) * AUM(i, k) / AUM(k,k);
+    end;
+    for j = 1:k
+    AUM(i, j) = 0;
+    end;
+  end;
+end;
