@@ -1,0 +1,25 @@
+AUM = [55, 99, 66, 77, 172, 89, 76;
+       246, 912, 88, 45, 6, 22, 34;
+       62, 93, 321, 912, 8, 423, 4;
+       53, 52, 754, 987, 134, 31, 2]; //matriz aumentada
+r = length(AUM(: ,1));
+c = length(AUM(1, :));
+
+disp(AUM);
+
+AUM = rref(AUM);
+
+//Eliminación Gauss-Jordan
+/**/
+for i = 1: c-1
+    AUM(i, :) = AUM(i, :) * (1/ AUM(i,i));
+    for j = 1: r
+        if j~=i then
+            e = -AUM(j,i);
+            AUM(j, :) = e*AUM(i, :) + AUM(j, :); 
+        end
+    end
+end
+/**/
+
+inc = AUM(: ,c);

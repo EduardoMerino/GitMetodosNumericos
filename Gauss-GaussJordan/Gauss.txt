@@ -1,0 +1,36 @@
+AUM = [16, 44, 100, 50, 40, 0, 30;
+       8, 22, 50, 25, 20, 0, 15;
+       99, 241, 5, 0, 100, 55, 789;
+       0, 689, 66, 33, 0, 18, 300]; //matriz aumentada
+r = length(AUM(: ,1));
+c = length(AUM(1, :));
+
+disp(AUM);
+
+for k = 1: r-1
+  for i = k+1: r
+    for j = k+1 : r+1
+        AUM(i,j) = AUM(i,j) - AUM(k,j) * AUM(i, k) / AUM(k,k);
+    end;
+    for j = 1:k
+        AUM(i, j) = 0;
+    end;
+  end;
+end;
+
+
+//Sustitución hacia atrás:
+i = 0;
+acum = 0;
+inc = zeros(r, 1);
+for i = 0: r - 1
+    if i > 0 then
+        for j = 0: i-1
+            j2 = j -1;
+            acum = acum - (inc(r - j, 1) * AUM(r - j, r - j2));
+        end
+    end
+    inc(r - i, 1) = (AUM(r - i, c) - acum)/ AUM(r - i,r - i);
+    acum = 0;
+end
+
