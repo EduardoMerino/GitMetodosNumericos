@@ -15,8 +15,8 @@ double Simpson13(int n){
   double x[n];
   double y[n];
   int i = 0;
-  double a;
-  double b;
+  double a = 0.0;
+  double b = 0.0;
   while(file >> a >> b){
     x[i] = a;
     y[i] = b;
@@ -24,22 +24,24 @@ double Simpson13(int n){
   }
   file.close();
 
-  double inpares = 0.0;
-  for(int j = 1; j <= n-2;  j += 2){
-    inpares = inpares + y[j] + 2;
-  }
-
   double pares = 0.0;
-  for(int k = 2; k <= n-3; k += 2){
-    pares = pares + y[k];
+  for(int j = 1; j <= n-2;  j += 2){
+    pares += y[j];
   }
 
-  return y[0] + (4 * inpares) + (2 * pares) + y[n];
+  double inpares = 0.0;
+  for(int k = 2; k <= n-3; k += 2){
+    inpares += y[k];
+  }
+
+  double ancho = (x[n - 1] - x[0]);
+  double sumas = y[0] + (4 * pares) + (2 * inpares) + y[n - 1];
+  return (x[n-1] - x[0]) * (sumas / (3 * (n - 1)));
 
 }
 
 int main(int argc, char const *argv[]) {
-  double Integral = Simpson13(4);
+  double Integral = Simpson13(5);
   cout << "La Integral aproximada por este método es: " << Integral << '\n';
   return 0;
 }
