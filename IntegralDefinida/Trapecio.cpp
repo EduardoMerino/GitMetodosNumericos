@@ -6,7 +6,9 @@
 using namespace std;
 
 double f(double x){
-  return  0.2 + (25 * x) - (200 * (pow(x,2))) + (675 * (pow(x,3))) - (900 * (pow(x,4))) + (400 * (pow(x,5)));
+  //return  0.2 + (25 * x) - (200 * (pow(x,2))) + (675 * (pow(x,3)))
+          //- (900 * (pow(x,4))) + (400 * (pow(x,5)));
+  return exp(pow(x, 2));
 }
 
 void Trapecio(double a, double b, int n){
@@ -24,7 +26,16 @@ void Trapecio(double a, double b, int n){
 }
 
 int main(int argc, char const *argv[]) {
-  Trapecio(0, 0.8, 80);
+  double inf = 0;
+  double sup = 0;
+  int num = 0;
+  cout << "Dame el límite inferior: ";
+  cin >> inf;
+  cout << "Dame el límite superior: ";
+  cin >> sup;
+  cout << "Dame el número de Trapecios: ";
+  cin >> num;
+  Trapecio(inf, sup, num);
   //cout << "Integral: " << ans << '\n';
   return 0;
 }
